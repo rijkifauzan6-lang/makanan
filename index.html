@@ -1,1029 +1,129 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
+<meta charset='UTF-8'/><meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport'/><meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script><link href="https://feeldreams.github.io/heihbd/style.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+  <script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
+  
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delicious Bites - Restoran Makanan Nusantara</title>
-    <style>
-        :root {
-            --orange: #e67e22;
-            --dark-orange: #d35400;
-            --cream: #fdf2e9;
-            --dark: #2c3e50;
-            --gray: #555;
-            --light-gray: #f8f9fa;
-            --white: #fff;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
-            --radius: 16px;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.7;
-            color: var(--dark);
-            background-color: #fffefb;
-            overflow-x: hidden;
-        }
-
-        /* ============ NAVBAR ============ */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 60px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            padding: 10px 60px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--dark-orange);
-            text-decoration: none;
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo span {
-            background: var(--orange);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            letter-spacing: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 36px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            position: relative;
-            padding: 6px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2.5px;
-            background: var(--orange);
-            border-radius: 10px;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--orange);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .btn-pesan {
-            background: var(--orange);
-            color: white !important;
-            padding: 10px 22px !important;
-            border-radius: 30px;
-            font-weight: 700 !important;
-            transition: var(--transition);
-            box-shadow: 0 4px 14px rgba(230, 126, 34, 0.35);
-        }
-        .btn-pesan:hover {
-            background: var(--dark-orange);
-            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.4);
-            transform: translateY(-2px);
-        }
-        .btn-pesan::after {
-            display: none;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-        }
-        .hamburger div {
-            width: 28px;
-            height: 3px;
-            background: var(--dark);
-            border-radius: 5px;
-            transition: var(--transition);
-        }
-        .hamburger.active div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-        .hamburger.active div:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active div:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
-
-        /* ============ HERO ============ */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 60px 60px 80px;
-            min-height: 88vh;
-            gap: 50px;
-            background: linear-gradient(135deg, #fffefb 0%, #fdf2e9 50%, #fff5ee 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -80px;
-            right: -80px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(230, 126, 34, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            flex: 1;
-            z-index: 1;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: #ffe4cc;
-            color: var(--dark-orange);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1.2;
-            color: #1a1a1a;
-            margin-bottom: 18px;
-            letter-spacing: -1.5px;
-        }
-
-        .hero-content h1 .highlight {
-            color: var(--orange);
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero-content h1 .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: rgba(230, 126, 34, 0.2);
-            border-radius: 5px;
-            z-index: -1;
-        }
-
-        .hero-content p {
-            font-size: 1.15rem;
-            color: var(--gray);
-            margin-bottom: 32px;
-            max-width: 480px;
-            line-height: 1.8;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 30px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: var(--orange);
-            color: white;
-            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
-        }
-        .btn-primary:hover {
-            background: var(--dark-orange);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(211, 84, 0, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--dark);
-            border: 2px solid #ddd;
-        }
-        .btn-outline:hover {
-            border-color: var(--orange);
-            color: var(--orange);
-            transform: translateY(-3px);
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
-        }
-
-        .hero-image .food-plate {
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle at 40% 40%, #fff 0%, #fdf2e9 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 0 0 15px rgba(230, 126, 34, 0.05),
-                0 0 0 30px rgba(230, 126, 34, 0.03);
-            position: relative;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-18px);
-            }
-        }
-
-        .floating-card {
-            position: absolute;
-            background: white;
-            padding: 12px 18px;
-            border-radius: 14px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            font-weight: 700;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            animation: floatCard 3s ease-in-out infinite;
-        }
-        .floating-card.top {
-            top: 10px;
-            right: -20px;
-            animation-delay: 0s;
-        }
-        .floating-card.bottom {
-            bottom: 20px;
-            left: -30px;
-            animation-delay: 1.5s;
-        }
-        @keyframes floatCard {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        .floating-card .star {
-            color: #f39c12;
-        }
-
-        /* ============ SECTION UMUM ============ */
-        .section {
-            padding: 90px 60px;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .section-header .subtitle {
-            color: var(--orange);
-            font-weight: 700;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        .section-header h2 {
-            font-size: 2.6rem;
-            font-weight: 900;
-            color: #1a1a1a;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
-        }
-        .section-header p {
-            color: var(--gray);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* ============ MENU ============ */
-        #menu {
-            background: var(--light-gray);
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .menu-card {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-        }
-        .menu-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-        }
-        .menu-card .card-img {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .menu-card:nth-child(1) .card-img {
-            background: linear-gradient(135deg, #ffe4cc, #ffd6a5);
-        }
-        .menu-card:nth-child(2) .card-img {
-            background: linear-gradient(135deg, #ffd6a5, #ffc8a2);
-        }
-        .menu-card:nth-child(3) .card-img {
-            background: linear-gradient(135deg, #ffccbc, #ffab91);
-        }
-        .menu-card:nth-child(4) .card-img {
-            background: linear-gradient(135deg, #ffe0b2, #ffcc80);
-        }
-        .menu-card:nth-child(5) .card-img {
-            background: linear-gradient(135deg, #fff9c4, #fff176);
-        }
-        .menu-card:nth-child(6) .card-img {
-            background: linear-gradient(135deg, #ffecb3, #ffe082);
-        }
-
-        .menu-card .badge-best {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            background: var(--dark-orange);
-            color: white;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .card-body {
-            padding: 22px 20px;
-        }
-        .card-body h3 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .card-body .desc {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 14px;
-            line-height: 1.5;
-        }
-        .card-body .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .card-body .price {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--dark-orange);
-        }
-        .card-body .btn-add {
-            background: var(--orange);
-            color: white;
-            border: none;
-            padding: 9px 18px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-        .card-body .btn-add:hover {
-            background: var(--dark-orange);
-            transform: scale(1.05);
-        }
-
-        /* ============ CARA PESAN ============ */
-        #cara-pesan {
-            background: white;
-        }
-        .steps {
-            display: flex;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .step {
-            flex: 1;
-            min-width: 200px;
-            text-align: center;
-            padding: 30px 20px;
-            border-radius: var(--radius);
-            transition: var(--transition);
-            background: #fffefb;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        .step:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-        }
-        .step .step-number {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--orange);
-            color: white;
-            font-size: 1.6rem;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 18px;
-            box-shadow: 0 6px 18px rgba(230, 126, 34, 0.3);
-        }
-        .step h4 {
-            font-weight: 800;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        .step p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* ============ TESTIMONI ============ */
-        #testimoni {
-            background: var(--cream);
-        }
-        .testimoni-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .testimoni-card {
-            background: white;
-            padding: 28px 24px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-        }
-        .testimoni-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-        .testimoni-card .quote {
-            font-size: 3rem;
-            color: var(--orange);
-            opacity: 0.4;
-            line-height: 0;
-            margin-bottom: 16px;
-        }
-        .testimoni-card p {
-            color: var(--gray);
-            font-style: italic;
-            margin-bottom: 16px;
-            line-height: 1.7;
-        }
-        .testimoni-card .author {
-            font-weight: 800;
-            color: var(--dark);
-        }
-        .testimoni-card .stars {
-            color: #f39c12;
-            letter-spacing: 2px;
-        }
-
-        /* ============ FOOTER ============ */
-        .footer {
-            background: #1a1a1a;
-            color: #ccc;
-            padding: 50px 60px 24px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .footer-col h4 {
-            color: white;
-            font-weight: 800;
-            margin-bottom: 16px;
-            font-size: 1.1rem;
-        }
-        .footer-col p,
-        .footer-col a {
-            color: #aaa;
-            font-size: 0.9rem;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-            transition: var(--transition);
-        }
-        .footer-col a:hover {
-            color: var(--orange);
-        }
-        .footer-bottom {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            font-size: 0.85rem;
-            color: #777;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ============ SCROLL TO TOP ============ */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--orange);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
-            z-index: 999;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .scroll-top.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .scroll-top:hover {
-            background: var(--dark-orange);
-            transform: translateY(-4px);
-        }
-
-        /* ============ NOTIFIKASI ============ */
-        .notification {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(120px);
-            background: #2c3e50;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 700;
-            z-index: 2000;
-            transition: transform 0.4s ease;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            pointer-events: none;
-        }
-        .notification.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 900px) {
-            .navbar {
-                padding: 14px 24px;
-            }
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                max-width: 320px;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                padding: 90px 30px 30px;
-                gap: 24px;
-                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
-                transition: var(--transition);
-                z-index: 1000;
-            }
-            .nav-links.active {
-                right: 0;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .hero {
-                flex-direction: column;
-                padding: 40px 24px 60px;
-                text-align: center;
-                min-height: auto;
-            }
-            .hero-content h1 {
-                font-size: 2.4rem;
-            }
-            .hero-content p {
-                max-width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .hero-image .food-plate {
-                width: 280px;
-                height: 280px;
-                font-size: 7rem;
-            }
-            .floating-card {
-                display: none;
-            }
-            .section {
-                padding: 60px 24px;
-            }
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            .footer {
-                padding: 40px 24px 20px;
-            }
-        }
-    </style>
+<title>buat kamuu</title>
+<link rel="icon" type="image/x-icon" href="https://www.palingit.com/favicon.ico">
+<meta name="description" content="HTML Replit Coding">
+<!-- 
+  Made with love by Rayys!
+  
+     Blog: https://PalingIT.com
+     Instagram: @rayyarrr
+     TikTok: @rayy4r
+     Email: rayyar0703@gmail.com
+     
+  Thanks to all <3
+-->
 </head>
 <body>
+	
+   <!-- Ganti Audio di sini -->
+   <audio src="https://feeldreams.github.io/djikhlas.mp3" id="linkmp3" class="sembunyi"></audio>
+   
+   <div id="bodyblur">
+     <!-- Wallpaper --><img src="https://feeldreams.github.io/wp9.jpg" id="wallpaper"/><div id="beneranblur"></div>
+   </div>
+   
+   <div id='Content'>
 
-    <!-- ============ NAVBAR ============ -->
-    <nav class="navbar" id="navbar">
-        <a href="#" class="logo">🍽️ Delicious<span>Bites</span></a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" onclick="closeMenu()">Beranda</a></li>
-            <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
-            <li><a href="#cara-pesan" onclick="closeMenu()">Cara Pesan</a></li>
-            <li><a href="#testimoni" onclick="closeMenu()">Testimoni</a></li>
-            <li><a href="#pesan" class="btn-pesan" onclick="closeMenu()">Pesan Sekarang</a></li>
-        </ul>
-        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </nav>
+     <div id="kadoIn">
+       <!-- Tombol Surat --><img src="https://feeldreams.github.io/kadoin.png"/>
+     </div>
+     <p id="ket">Klik Kadonya!</p>
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <span class="hero-badge">🔥 Best Seller Nusantara</span>
-            <h1>Nikmati Kelezatan <span class="highlight">Masakan Rumahan</span> Terbaik</h1>
-            <p>
-                Kami hadirkan cita rasa autentik masakan Indonesia, dibuat dari bahan segar pilihan
-                dengan resep turun-temurun. Dijamin bikin nagih!
-            </p>
-            <div class="hero-buttons">
-                <a href="#menu" class="btn btn-primary">📋 Lihat Menu</a>
-                <a href="#pesan" class="btn btn-outline">🛵 Pesan Antar</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="food-plate">
-                🍛
-                <div class="floating-card top">⭐ 4.9 Rating</div>
-                <div class="floating-card bottom">🔥 1000+ Pesanan</div>
-            </div>
-        </div>
-    </section>
+     <div class="kumpulanstiker">
+         <!-- Stiker untuk Konten -->
+         <img src="https://feeldreams.github.io/bunga.gif" id="fotostiker"/>
+         <img src="https://feeldreams.github.io/pusn.gif" id="fotostiker1"/>
+         <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker2"/>
+         <img src="https://feeldreams.github.io/cilukba.gif" id="fotostiker3"/>
+         <img src="https://feeldreams.github.io/pandakuning.gif" id="fotostiker4"/>
+         <img src="https://feeldreams.github.io/emawh.gif" id="fotostiker5"/>
+         
+         <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker6"/>
+     </div>
+     
+     <p id="halo" class="halo"></p>
+     
+     <div><blockquote id='bq' data-text='㋡'>
+       <p id="kalimat">Aku Ada Sesuatu Nih 🤣❤️</p>
 
-    <!-- ============ MENU ============ -->
-    <section class="section" id="menu">
-        <div class="section-header">
-            <p class="subtitle">Menu Andalan</p>
-            <h2>Pilihan Terbaik Untukmu</h2>
-            <p>Setiap menu dibuat dengan cinta dan bahan berkualitas tinggi</p>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="pesan('Nasi Goreng Special')">
-                <div class="card-img">🍛<span class="badge-best">Best Seller</span></div>
-                <div class="card-body">
-                    <h3>Nasi Goreng Special</h3>
-                    <p class="desc">Nasi goreng dengan bumbu rempah pilihan, telur mata sapi, dan kerupuk.</p>
-                    <div class="price-row">
-                        <span class="price">Rp 25.000</span>
-                        <button class="btn-add" onclick="event.stopPropagation(); pesan('Nasi Goreng Special')">+ Pesan</button>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-card" onclick="pesan('Ayam Goreng Kremes')">
-                <div class="card-img">🍗</div>
-                <div class="card-body">
-                    <h3>Ayam Goreng Kremes</h3>
-                    <p class="desc">Ayam goreng renyah dengan kremes gurih dan sambal terasi.</p>
-                    <div class="price-row">
-                        <span class="price">Rp 30.000</span>
-                        <button class="btn-add" onclick="event.stopPropagation(); pesan('Ayam Goreng Kremes')">+ Pesan</button>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-card" onclick="pesan('Soto Ayam')">
-                <div class="card-img">🍜<span class="badge-best">Favorit</span></div>
-                <div class="card-body">
-                    <h3>Soto Ayam</h3>
-                    <p class="desc">Kuah kuning hangat dengan suwiran ayam, bihun, dan taburan bawang goreng.</p>
-                    <div class="price-row">
-                        <span class="price">Rp 22.000</span>
-                        <button class="btn-add" onclick="event.stopPropagation(); pesan('Soto Ayam')">+ Pesan</button>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-card" onclick="pesan('Gado-Gado')">
-                <div class="card-img">🥗</div>
-                <div class="card-body">
-                    <h3>Gado-Gado</h3>
-                    <p class="desc">Sayuran segar dengan siraman bumbu kacang kental dan lontong.</p>
-                    <div class="price-row">
-                        <span class="price">Rp 20.000</span>
-                        <button class="btn-add" onclick="event.stopPropagation(); pesan('Gado-Gado')">+ Pesan</button>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-card" onclick="pesan('Sate Ayam')">
-                <div class="card-img">🍢</div>
-                <div class="card-body">
-                    <h3>Sate Ayam</h3>
-                    <p class="desc">10 tusuk sate ayam bakar dengan bumbu kecap dan lontong.</p>
-                    <div class="price-row">
-                        <span class="price">Rp 28.000</span>
-                        <button class="btn-add" onclick="event.stopPropagation(); pesan('Sate Ayam')">+ Pesan</button>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-card" onclick="pesan('Es Teh Manis')">
-                <div class="card-img">🍹</div>
-                <div class="card-body">
-                    <h3>Es Teh Manis</h3>
-                    <p class="desc">Teh segar dengan gula aren asli, pelepas dahaga sempurna.</p>
-                    <div class="price-row">
-                        <span class="price">Rp 8.000</span>
-                        <button class="btn-add" onclick="event.stopPropagation(); pesan('Es Teh Manis')">+ Pesan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+       <p id="pesan1">Klik 4 LOVE di Bawah! 😆❤️</p>
+       <div id="kolombaru">
+         <li id="lv1">🤍</li>
+         <li id="lv2">🤍</li>
+         <li id="lv3">🤍</li>
+         <li id="lv4">🤍</li>
+       </div>
 
-    <!-- ============ CARA PESAN ============ -->
-    <section class="section" id="cara-pesan">
-        <div class="section-header">
-            <p class="subtitle">Gampang Banget</p>
-            <h2>Cara Memesan</h2>
-            <p>Hanya 4 langkah mudah untuk menikmati hidangan kami</p>
-        </div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h4>Pilih Menu</h4>
-                <p>Telusuri menu favoritmu dan pilih yang bikin lapar.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h4>Klik Pesan</h4>
-                <p>Klik tombol pesan dan isi detail singkat pemesanan.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h4>Konfirmasi</h4>
-                <p>Tim kami akan konfirmasi pesananmu secepat kilat.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h4>Antar & Nikmati</h4>
-                <p>Pesanan diantar hangat, siap dinikmati di rumah!</p>
-            </div>
-        </div>
-    </section>
+       <p id="pesan2">Tunggu...</p>
+       <!-- Pesan -->
+       <p id="pesan3">Ciee.. Ada yang Ultah Nih 🤣❤️</p>
+       <p id="pesan4">Happy Birthday, </p>
+       <p id="pesan5" class="gaya2">Nambah tua aja ya, hehe</p>
+       <p id="pesan6" class="gaya2">Moga panjang umur ❤️</p>
+       <p id="pesan7" class="gaya2">Sehat selalu ya!</p>
 
-    <!-- ============ TESTIMONI ============ -->
-    <section class="section" id="testimoni">
-        <div class="section-header">
-            <p class="subtitle">Testimoni</p>
-            <h2>Apa Kata Mereka</h2>
-            <p>Pelanggan setia kami yang sudah merasakan kelezatannya</p>
-        </div>
-        <div class="testimoni-grid">
-            <div class="testimoni-card">
-                <div class="quote">"</div>
-                <p>"Nasi gorengnya juara banget! Bumbunya meresap, porsinya banyak. Langganan deh pokoknya."</p>
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <span class="author">- Rina, Jakarta</span>
-            </div>
-            <div class="testimoni-card">
-                <div class="quote">"</div>
-                <p>"Ayam kremesnya renyah banget, sambalnya juga pedesnya pas. Recommended abis!"</p>
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <span class="author">- Budi, Bandung</span>
-            </div>
-            <div class="testimoni-card">
-                <div class="quote">"</div>
-                <p>"Pesen gado-gado, datang masih fresh. Bumbu kacangnya kental, nagih! Pasti balik lagi."</p>
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <span class="author">- Siska, Surabaya</span>
-            </div>
-        </div>
-    </section>
+       <p id="pesan8" class="gaya2">Canda wkwwk :v</p>
+       <p id="pesan9" class="gaya2">Oh iya, semoga di hari spesialmu ini kamu dapat menjadi pribadi yang lebih baik yaa.. 🥳❤️</p>
+       <p id="pesan10" class="gaya2">Happy Level Up Day!! 🥳</p>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer" id="pesan">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>🍽️ Delicious Bites</h4>
-                <p>Restoran masakan Nusantara terpercaya sejak 2018. Menyajikan hidangan rumahan berkualitas.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Menu</h4>
-                <a href="#menu">Nasi Goreng</a>
-                <a href="#menu">Ayam Kremes</a>
-                <a href="#menu">Soto Ayam</a>
-                <a href="#menu">Gado-Gado</a>
-            </div>
-            <div class="footer-col">
-                <h4>Kontak</h4>
-                <p>📞 0812-3456-7890</p>
-                <p>📧 halo@deliciousbites.id</p>
-                <p>📍 Jl. Kuliner No. 10, Jakarta</p>
-            </div>
-            <div class="footer-col">
-                <h4>Jam Buka</h4>
-                <p>Senin - Jumat: 08.00 - 21.00</p>
-                <p>Sabtu - Minggu: 09.00 - 22.00</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2024 Delicious Bites. All rights reserved. | Dibuat dengan ❤️ untuk pecinta kuliner Indonesia.
-        </div>
-    </footer>
+       <!-- Tombol Lanjut -->
+       <p id="opsL">Klik untuk Lanjut</p>
+     </blockquote></div>
 
-    <!-- ============ SCROLL TO TOP ============ -->
-    <button class="scroll-top" id="scrollTopBtn" title="Kembali ke atas" onclick="scrollToTop()">⬆</button>
+     <!-- Tombol Kirim Pesan -->
+     <div id="Tombol"><a id="By">&#128140; Lanjut</a></div>
 
-    <!-- ============ NOTIFIKASI ============ -->
-    <div class="notification" id="notification"></div>
+     <!-- Pesan Tambahan -->
+     <p id="katatambahan" class="sembunyi">Gajadi deh soalnya kamu bau wleee 😜</p>
+     
+     <!-- Pesan Ditolak -->
+     <div id="pesanditolak">
+       <img id="stikerditolak" src="https://feeldreams.github.io/weee.gif"/>
+       <p id="kataditolak">Yaudah kalo gamau mh 😜</p>
+     </div>
 
-    <script>
-        // ============ NAVBAR SCROLL EFFECT ============
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+   </div>
 
-            // Scroll to top button
-            const scrollBtn = document.getElementById('scrollTopBtn');
-            if (window.scrollY > 400) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
-        });
+<script>
+  const body = document.querySelector("body");const swalst = Swal.mixin({timer: 2300, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90,}); audio = new Audio('' + linkmp3.src); ftganti=0;fungsi=0;fungsiAwal=0;deffotostiker=fotostiker.src;function berjatuhan() {const heart = document.createElement("div"); heart.className = "fas fa-snowflake"; heart.style.left = (Math.random() * 90)+"vw"; heart.style.animationDuration = (Math.random()*3)+2+"s"; body.appendChild(heart);} setInterval(function name(params) {var heartArr = document.querySelectorAll(".fa-snowflake"); if (heartArr.length > 100) {heartArr[0].remove()}},100);Content.style = "opacity:1;margin-top:16vh"; const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,}); 
+	
+  document.getElementById("kadoIn").onclick = function() {if(fungsiAwal==0){audio.play();fungsiAwal=1;kadoIn.style="transition:all .8s ease;transform:scale(10);opacity:0";wallpaper.style="transform: scale(1.5);";ket.style="display:none";setTimeout(initengahan,300);setTimeout(inipesan,500)}}
+  
+  async function inipesan(){
+    var { value: nama } = await swals.fire({
+           title: 'Masukin Nama Kamu', input: 'text',
+       });
+       if(nama && nama.length < 11){
+         window.nama = nama;
+         vketikhalo="Hai, " + nama + " ✨";
+         mulainama();
+         } else {
+           await swals.fire('Ups!', 'Nama tidak boleh kosong atau lebih dari 10 karakter, ya!');inipesan();
+    }
+  }
 
-        // ============ HAMBURGER MENU ============
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-
-        function toggleMenu() {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        }
-
-        // Tutup menu jika klik di luar
-        document.addEventListener('click', (e) => {
-            if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-
-        // ============ SCROLL TO TOP ============
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ============ NOTIFIKASI PESAN ============
-        function pesan(namaMenu) {
-            const notif = document.getElementById('notification');
-            notif.textContent = `✅ ${namaMenu} berhasil ditambahkan ke keranjang!`;
-            notif.classList.add('show');
-
-            setTimeout(() => {
-                notif.classList.remove('show');
-            }, 2500);
-        }
-
-        // ============ TUTUP MENU SAAT LINK DIKLIK (MOBILE) ============
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 900) {
-                    closeMenu();
-                }
-            });
-        });
-    </script>
+  //Variable Pertanyaan Akhir
+  var tanya = 'Mau Kado Gak Nih? 😶❤️';
+  var opstanya = 'Ayo jawab 😆';
+  var tompositif = 'Mau';
+  var tomnegatif = 'Engga';
+    
+    async function menuju(){pesanwhatsapp = "Makasii udah ngucapin " + nama + " ultah ><";await swals.fire('OK!', 'Kirim jawabannya ke WhatsApp aku, ya!', 'success');window.location = "https://api.whatsapp.com/send?phone=&text=" + pesanwhatsapp;}
+</script>
+<script src="https://feeldreams.github.io/heihbd/script.js"></script>
+<!-- Sampai Sini -->
 </body>
-</html>
+  </html>
